@@ -23,4 +23,16 @@ public class VendorAPIs {
         return "New Vendor created Successfully";
     }
 
+    @PutMapping
+    public String updateVendor(@RequestBody Vendor vendor) {
+        this.vendor = vendor;
+        return "Vendor updated successfully";
+    }
+
+    @DeleteMapping("{vendorId}")
+    public String deleteVendor(@RequestBody Vendor vendor) {
+        this.vendor = null;
+        return "Vendor deleted successfully";
+    }
+
 }
