@@ -1,6 +1,15 @@
 package com.crudapp.crud_app.model;
 
+import com.crudapp.crud_app.service.VendorService;
+import jakarta.persistence.*;
+
+//import javax.persistence.Entity;
+
+@Entity
+@Table(name = "vendorApp")
 public class Vendor {
+
+    @Id
     private String vendorId;
     private String vendorName;
     private String vendorLocation;
@@ -47,6 +56,8 @@ public class Vendor {
                 '}';
     }
 
+    public Vendor() {}
+
     public Vendor(String vendorId, String vendorName, String vendorLocation, String vendorPhoneNumber) {
         this.vendorId = vendorId;
         this.vendorName = vendorName;
@@ -55,4 +66,4 @@ public class Vendor {
     }
 
     private String vendorPhoneNumber;
-}
+     }
