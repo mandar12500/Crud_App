@@ -4,8 +4,12 @@ spring:
     username: root
     password: dummy123
 
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+
 #JPA Settings:
-  jpa.hibernate.ddl_auto: create
+  jpa.hibernate.ddl_auto: update
 
 server:
   port: 8090

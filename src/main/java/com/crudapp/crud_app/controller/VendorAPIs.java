@@ -1,7 +1,11 @@
 package com.crudapp.crud_app.controller;
 
 import com.crudapp.crud_app.model.Vendor;
+import com.crudapp.crud_app.response.ResponseHandler;
 import com.crudapp.crud_app.service.VendorService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +16,9 @@ public class VendorAPIs {
 
 //    Vendor vendor;
 
+    @Value("${server.port}")
+    String portNumber;
+
     VendorService vendorService;
 
     public VendorAPIs(VendorService vendorService) {
@@ -19,12 +26,18 @@ public class VendorAPIs {
     }
 
     @GetMapping("/{vendorId}")
-    public Vendor getVendorDetails(@PathVariable("vendorId") String vendorId) {
+    public ResponseEntity<Object> getVendorDetails(@PathVariable("vendorId") String vendorId) {
 //        return "Mandar";
         System.out.println("Querying DB for Vendor Details");
+        String dbResponse = vendorService.getVendor(vendorId).toString();
+        System.out.println(dbResponse);
+        System.out.println(portNumber);
 //        return new Vendor("V1", "Vishal", "Pune", "9897856789");
 //        return new Vendor(vendorId, vendorId, "Pune", "9897856789");
-        return vendorService.getVendor(vendorId);
+
+        return ResponseHandler.responseBuilder("Details are as below", HttpStatus.OK, vendorService.getVendor(vendorId));
+
+        //return vendorService.getVendor(vendorId);
 //        return vendor;
     }
 

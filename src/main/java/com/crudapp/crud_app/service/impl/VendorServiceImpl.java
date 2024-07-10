@@ -1,5 +1,6 @@
 package com.crudapp.crud_app.service.impl;
 
+import com.crudapp.crud_app.exceptions.VendorNotFoundException;
 import com.crudapp.crud_app.model.Vendor;
 import com.crudapp.crud_app.service.VendorService;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,10 @@ public class VendorServiceImpl implements VendorService {
 
     @Override
     public Vendor getVendor(String vendorId) {
+
+        if (vendorRepository.findById(vendorId).isEmpty())
+            throw new VendorNotFoundException("The Vendor you are looking for does not exist");
+
         return vendorRepository.findById(vendorId).get();
 //        vendorRepository.findB
 //        return "Successful";
